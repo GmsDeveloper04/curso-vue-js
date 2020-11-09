@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+
+<body>
+
+    <div id="game">
+
+        <div class="statsHolder">
+            <div class="statsPanePlayer">
+                <h1 class="statsPlayerAndMonsterName">Jogador</h1>
+
+                <div class="progressBarBox">
+                    <div :style="estiloProgressPlayer"> </div>
+                </div>
+                <h2 class="percentualStats">{{ vidaPlayer }}%</h2>
+            </div>
+
+            <div class="statsPaneMonster">
+                <h1 class="statsPlayerAndMonsterName">Monstro</h1>
+
+                <div class="progressBarBox">
+                    <div :style="estiloProgressMonstro"></div>
+                </div>
+                <h2 class="percentualStats">{{ vidaMonstro }}%</h2>
+
+            </div>
+
+            <h2 :class="[{venceuJogo},{perdeuJogo}]" >{{ resultadoBatalha }}</h2>
+        </div>
+
+        <div v-if="!jogoIniciado" class="iniciarJogoBox">
+            <button @click="iniciarJogo" class="btnIniciarJogo">Iniciar Jogo</button>
+        </div>
+
+        <div v-if="jogoIniciado"              class="jogadasBox">
+            <button   @click="atacar"         class="btnJogadas">ATAQUE</button>
+            <button   @click="atacarEspecial" class="btnJogadas">ATAQUE ESPECIAL</button>
+            <button   @click="curar"          class="btnJogadas">CURAR</button>
+            <button   @click="desistir"       class="btnJogadas">DESISTIR</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Jogadas Anteriores</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr v-for="log in logJogadas">
+                    <td>{{ log.jogada }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+
+</html>
+
+
+<script src="app.js"></script>
