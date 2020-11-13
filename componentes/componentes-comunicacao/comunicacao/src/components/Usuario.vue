@@ -7,7 +7,10 @@
         <input type="Number" placeholder="Idade" v-model="usuario.idade">
         <hr>
         <div class="componentes">
-            <app-usuario-info :usuario="usuario"/>
+            <app-usuario-info  
+                @alterouUsuario="usuario = $event" 
+                :reiniciarUserFnc="reiniciarUser" 
+                :usuario="usuario"/>
             <app-usuario-editar />
         </div>
     </div>
@@ -16,6 +19,7 @@
 <script>
 import AppUsuarioInfo from './UsuarioInfo'
 import AppUsuarioEditar from './UsuarioEditar'
+import barramento from '@/barramento'
 
 export default {
     components: { AppUsuarioInfo, AppUsuarioEditar },
@@ -27,7 +31,23 @@ export default {
                 idade : 18
             }
         }
+    },
+    methods : {
+        reiniciarUser(){
+            this.usuario = {
+                nome : 'Guilherme Reiniciado',
+                sobrenome : 'Maciel',
+                idade : 18
+            }
+        }
+    },
+    created(){
+        //ESCUTA ALTERAÇÕES QUE ACONTECERAM VIA BARRAMENTO
+        barramento.$on('alterouUsuario', usuario => {
+            console.info(usuario)
+        })
     }
+
 }
 </script>
 
