@@ -56,6 +56,10 @@ export default {
         width: 90%;
         text-align: center;
         color:white;
+        user-select: none;
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }
     .task p{
         float: right;
@@ -64,6 +68,9 @@ export default {
         text-align: center;
         margin:auto;
         font-family: sans-serif;
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .taskCompleted {

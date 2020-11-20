@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <TaskCompletionProgress :taskList="taskList"/>
-    <TaskCreator/>
+    <TaskCreator @taskCreated="addTask"/>
     <hr>
     <TaskList :taskList="taskList" />
   </div>
@@ -28,12 +28,21 @@ export default {
             taskList : []
         }
   },
-  created(){
-        taskBus.onTaskCreated(newTask => {
-            console.log('new task received',newTask)
-            this.taskList.push( {... newTask} )
-        }),
+  methods : {
+    addTask(newTask) {
+      console.log('new task received',newTask)
 
+            const sameDescription = t => t.description == newTask.description;
+
+            const hasNotDuplicatedValues = this.taskList.filter(sameDescription).length == 0
+
+            if(hasNotDuplicatedValues){
+              this.taskList.push( {... newTask} )
+            }
+    }
+  }
+  ,
+  created(){
         taskBus.onTaskDeleted((task, index) => {
             console.log('Deleting task',this.taskList,index)
             this.taskList.splice(index, 1); 

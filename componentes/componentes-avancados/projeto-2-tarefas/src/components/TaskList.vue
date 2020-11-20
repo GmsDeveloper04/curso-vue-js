@@ -5,7 +5,7 @@
         <h2>Lista de Tarefas</h2>
 
         <div  class="row">
-            <div v-for="(task, index) in taskList" :key="index" class="col-md-3">
+            <div v-for="(task, index) in taskList" :key="task.description" class="col-md-3">
                  <Task :task="task" :index="index" />
             </div>
         </div>  

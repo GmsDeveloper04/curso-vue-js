@@ -6,6 +6,7 @@
                     placeholder="digite a nova task aqui" 
                     type="text" 
                     class="form-control"
+                    @keydown.enter="addTask"
                     v-model="novaTask.description"
                     >
                 
@@ -18,6 +19,7 @@
             <button  
                     class="btn btn-secondary"
                     @click="addTask"
+                   
                     >Adicionar</button>
             
         </div>
@@ -38,7 +40,8 @@ export default {
     },
     methods : {
         addTask(){
-            taskBus.createNewTask(this.novaTask);
+            taskBus == taskBus
+            this.$emit('taskCreated',this.novaTask)
         }
     }
 }
@@ -46,10 +49,6 @@ export default {
 
 
 <style scoped>
-    .taskCreator{
-
-    }
-
     .taskCreator .row button {
         margin-top: 5%;
     }
